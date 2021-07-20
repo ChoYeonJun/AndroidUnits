@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "324429649174",
+    "firebase_url": "https://fir-authaccess-default-rtdb.firebaseio.com",
+    "project_id": "fir-authaccess",
+    "storage_bucket": "fir-authaccess.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324429649174:android:749e44bbebaa62e82d6c37",
+        "android_client_info": {
+          "package_name": "com.cyj.firebaseauthaccess"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324429649174-vpj2rtjjn9u30khm8fu08vn0g6cu3aq0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7GlCQH8v-3NGKWaHxQTEEUrW9qMqIfIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324429649174-vpj2rtjjn9u30khm8fu08vn0g6cu3aq0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
