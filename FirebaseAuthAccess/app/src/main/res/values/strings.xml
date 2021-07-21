@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FirebaseAuthAccess</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_registration">REGISTER</string>
+    <string name="id_req">ID</string>
+    <string name="pw_req">PASSWORD</string>
+<!--    <string name="default_web_client_id">project-324429649174</string>-->
 </resources>
