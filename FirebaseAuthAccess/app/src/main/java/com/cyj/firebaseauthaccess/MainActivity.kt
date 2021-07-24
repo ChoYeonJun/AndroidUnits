@@ -5,16 +5,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.*
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+//import kotlinx.android.synthetic.main.activity_done.*
+
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -24,7 +26,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     //google client
     private lateinit var googleSignInClient: GoogleSignInClient
+//    private lateinit var googleSignInAccount : GoogleSignInAccount
 
+    //google Account Info
+    private lateinit var accountEmail : String
+    private lateinit var accountName : String
+
+//    private lateinit var editText_accountEmail : EditText
+//    private lateinit var editText_accountName : EditText
     //private const val TAG = "GoogleActivity"
     private val RC_SIGN_IN = 99
 
@@ -32,19 +41,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val btn_googleSignIn = findViewById<SignInButton>(R.id.btn_googleSignIn)
-        //btn_googleSignIn.setOnClickListener (this) // 구글 로그인 버튼
         btn_googleSignIn.setOnClickListener { signIn() }
 
-        //Google 로그인 옵션 구성. requestIdToken 및 Email 요청
+//        editText_accountEmail = findViewById<EditText>(R.id.accountEmail)!!
+//        editText_accountName = findViewById<EditText>(R.id.accountName)!!
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
-            //'R.string.default_web_client_id' 에는 본인의 클라이언트 아이디를 넣어주시면 됩니다.
-            //저는 스트링을 따로 빼서 저렇게 사용했지만 스트링을 통째로 넣으셔도 됩니다.
             .requestEmail()
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
-
         //firebase auth 객체
         firebaseAuth = FirebaseAuth.getInstance()
     }
@@ -53,9 +59,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     public override fun onStart() {
         super.onStart()
         val account = GoogleSignIn.getLastSignedInAccount(this)
-        if (account !== null) { // 이미 로그인 되어있을시 바로 메인 액티비티로 이동
-            toMainActivity(firebaseAuth.currentUser)
-        }
+//        val email = GoogleSignIn.getLastSignedInAccount(this)?.displayName
+//        if (account !== null) { // 이미 로그인 되어있을시 바로 메인 액티비티로 이동
+//            toMainActivity(firebaseAuth.currentUser)
+//            accessAccountInfo(account)
+//        }
     } //onStart End
 
     // onActivityResult
@@ -68,6 +76,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
+//                googleSignInAccount = task.getResult(ApiException::class.java)!!
                 firebaseAuthWithGoogle(account!!)
 
             } catch (e: ApiException) {
@@ -81,6 +90,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
         Log.d("LoginActivity", "firebaseAuthWithGoogle:" + acct.id!!)
 
+        accessAccountInfo(acct)
         //Google SignInAccount 객체에서 ID 토큰을 가져와서 Firebase Auth로 교환하고 Firebase에 인증
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         firebaseAuth.signInWithCredential(credential)
@@ -99,7 +109,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     // toMainActivity
     fun toMainActivity(user: FirebaseUser?) {
         if (user != null) { // MainActivity 로 이동
-            startActivity(Intent(this, DoneActivity::class.java))
+            val intent = Intent(this, DoneActivity::class.java)
+            intent.putExtra("Email", accountEmail)
+            intent.putExtra("Name", accountName)
+
+            startActivity(intent)
             finish()
         }
     } // toMainActivity End
@@ -108,6 +122,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
+
     }
     // signIn End
 
@@ -131,5 +146,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         googleSignInClient.revokeAccess().addOnCompleteListener(this) {
 
         }
+    }
+
+    private fun accessAccountInfo(account : GoogleSignInAccount){
+        accountEmail = account.email.toString()
+        accountName = account.displayName.toString()
+        Log.d("Email", accountEmail)
+        Log.d("Name", accountName)
     }
 }
