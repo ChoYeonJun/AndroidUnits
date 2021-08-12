@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">LicenseVerify</string>
+    <string name="uri">https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=JjCrHBmh%2B2UvfplCXeb4ABJ2dfTS7x4LO04l4Mqd8pn%2B7igVsqoEHXiLOgM0bNnDxKc77aWmApF7iIFE0flZRQ%3D%3D</string>
+</resources>
