@@ -1,6 +1,5 @@
 package com.cyj.navermapicon
 
-import android.R
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
@@ -8,11 +7,13 @@ import android.location.Address
 import android.location.Geocoder
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout.LayoutParams
 import android.widget.Toast
@@ -45,10 +46,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             if (drawerToggle == false) {
                 val objectAnimator = ObjectAnimator.ofFloat(binding.content, "translationY", -1200f)
                 objectAnimator.duration = 500 //0.5초에 걸쳐 진행.
+                binding.imageView3.visibility = View.VISIBLE
                 objectAnimator.start()
             } else {
                 val objectAnimator = ObjectAnimator.ofFloat(binding.content, "translationY", 0f)
                 objectAnimator.duration = 500 //0.5초에 걸쳐 진행.
+                binding.imageView3.visibility = View.GONE
                 objectAnimator.start()
             }
             drawerToggle = !drawerToggle
@@ -126,6 +129,16 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    fun setFragment() {
+        val fm = supportFragmentManager
+        val mapFragment = fm.findFragmentById(R.id.map) as MapFragment?
+            ?: MapFragment.newInstance().also {
+                fm.beginTransaction().add(R.id.map, it).commit()
+            }
+
+        mapFragment.getMapAsync(this)
+    }
+
     fun isConnected(context: Context): Boolean{
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
@@ -133,6 +146,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         return isConnected
     }
+
     override fun onMapReady(naverMap: NaverMap) {
 //        val params = LayoutParams(
 //            LayoutParams.MATCH_PARENT,
@@ -196,14 +210,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             .displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
     }
 
-    fun setFragment() {
-        val fm = supportFragmentManager
-        val mapFragment = fm.findFragmentById(R.id.map) as MapFragment?
-            ?: MapFragment.newInstance().also {
-                fm.beginTransaction().add(R.id.map, it).commit()
-            }
-        mapFragment.getMapAsync(this)
-    }
+
 
      fun uploadContent(){
 
