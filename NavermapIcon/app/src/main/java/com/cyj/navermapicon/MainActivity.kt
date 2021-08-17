@@ -1,33 +1,30 @@
 package com.cyj.navermapicon
 
+import android.R
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.graphics.drawable.BitmapDrawable
 import android.location.Address
 import android.location.Geocoder
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.DisplayMetrics
 import android.util.Log
-import android.view.LayoutInflater
 import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.LinearLayout.LayoutParams
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.cyj.navermapicon.databinding.ActivityMainBinding
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import java.io.IOException
 
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -58,19 +55,32 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         setFragment()
-//        setContentMargin()
+        setContentMargin()
     }
 
 
     fun getPoint(address: String) : List<Address>{
+        try{
+            val geocoder = Geocoder(baseContext)
+            val list = geocoder.getFromLocationName(address, 10)
 
-                val geocoder = Geocoder(baseContext)
-                val list = geocoder.getFromLocationName(address, 10)
-                toast(list.toString())
-                return list
+            toast(list.toString())
+
+            return list
 //                toast(e.toString())
 //                log("geocoder", e.toString())
+            // ... your code that throws the exception here
+        }catch(e: IOException){
+            Log.e("Error", "grpc failed: " + e.message, e)
+            val geocoder = Geocoder(baseContext)
+            val list = geocoder.getFromLocationName(address, 10)
+            toast(list.toString())
+            return list
+            // ... retry again your code that throws the exeception
         }
+
+
+    }
 
     fun setMarker(list: List<Address>){
         toast(list.size.toString())
@@ -135,14 +145,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         uiSettings.isLocationButtonEnabled = true
 //        naverMap.locationSource = locationSource
         val str = "전라북도 전주시 덕진구 소리로 179"
-        GlobalScope.launch (Dispatchers.Main){
-            if(isConnected(baseContext)){
-                val list = getPoint(str)
-                setMarker(list)
-            }else{
-                toast("인터넷 연결을 확인해주세요")
-            }
-        }
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed(Runnable {
+            val list = getPoint(str)
+            setMarker(list)
+        }, 0)
+
+
     }
 
     //    override fun onRequestPermissionsResult(requestCode: Int,
