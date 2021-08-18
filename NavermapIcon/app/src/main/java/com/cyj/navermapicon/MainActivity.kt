@@ -40,22 +40,22 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val view = binding.root
         setContentView(view)
 
-        val but = binding.imageView
-        but.setOnClickListener {
-            toast(drawerToggle.toString())
-            if (drawerToggle == false) {
-                val objectAnimator = ObjectAnimator.ofFloat(binding.content, "translationY", -1200f)
-                objectAnimator.duration = 500 //0.5초에 걸쳐 진행.
-                binding.imageView3.visibility = View.VISIBLE
-                objectAnimator.start()
-            } else {
-                val objectAnimator = ObjectAnimator.ofFloat(binding.content, "translationY", 0f)
-                objectAnimator.duration = 500 //0.5초에 걸쳐 진행.
-                binding.imageView3.visibility = View.GONE
-                objectAnimator.start()
-            }
-            drawerToggle = !drawerToggle
-        }
+//        val but = binding.imageView
+//        but.setOnClickListener {
+//            toast(drawerToggle.toString())
+//            if (drawerToggle == false) {
+//                val objectAnimator = ObjectAnimator.ofFloat(binding.content, "translationY", -1200f)
+//                objectAnimator.duration = 500 //0.5초에 걸쳐 진행.
+//                binding.imageView3.visibility = View.VISIBLE
+//                objectAnimator.start()
+//            } else {
+//                val objectAnimator = ObjectAnimator.ofFloat(binding.content, "translationY", 0f)
+//                objectAnimator.duration = 500 //0.5초에 걸쳐 진행.
+//                binding.imageView3.visibility = View.GONE
+//                objectAnimator.start()
+//            }
+//            drawerToggle = !drawerToggle
+//        }
 
         setFragment()
         setContentMargin()
@@ -212,24 +212,24 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
 
-     fun uploadContent(){
-
-//         val frmlayout = binding.map
-//         val imageView = ImageView(baseContext)
-//         imageView.setImageResource(R.drawable.btn_left)
-//         frmlayout.addView(imageView, 100, 100)
-         toast(drawerToggle.toString())
-         if (drawerToggle == false) {
-             val objectAnimator = ObjectAnimator.ofFloat(binding.content, "translationY", -1200f)
-             objectAnimator.duration = 500 //0.5초에 걸쳐 진행.
-             objectAnimator.start()
-         } else {
-             val objectAnimator = ObjectAnimator.ofFloat(binding.content, "translationY", 0f)
-             objectAnimator.duration = 500 //0.5초에 걸쳐 진행.
-             objectAnimator.start()
-         }
-         drawerToggle = !drawerToggle
-     }
+//     fun uploadContent(){
+//
+////         val frmlayout = binding.map
+////         val imageView = ImageView(baseContext)
+////         imageView.setImageResource(R.drawable.btn_left)
+////         frmlayout.addView(imageView, 100, 100)
+//         toast(drawerToggle.toString())
+//         if (drawerToggle == false) {
+//             val objectAnimator = ObjectAnimator.ofFloat(binding.content, "translationY", -1200f)
+//             objectAnimator.duration = 500 //0.5초에 걸쳐 진행.
+//             objectAnimator.start()
+//         } else {
+//             val objectAnimator = ObjectAnimator.ofFloat(binding.content, "translationY", 0f)
+//             objectAnimator.duration = 500 //0.5초에 걸쳐 진행.
+//             objectAnimator.start()
+//         }
+//         drawerToggle = !drawerToggle
+//     }
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
