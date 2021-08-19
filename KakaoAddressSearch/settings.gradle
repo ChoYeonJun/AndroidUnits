@@ -1,0 +1,2 @@
+rootProject.name = "KakaoAddressSearch"
+include ':app'
