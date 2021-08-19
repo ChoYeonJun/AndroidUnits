@@ -9,6 +9,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.opengl.Visibility
 import android.os.Bundle
+import android.os.FileUtils
 import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
@@ -25,7 +26,13 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import java.io.File
 import java.io.IOException
+import java.lang.Exception
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -62,34 +69,26 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
-    fun getPoint(address: String) : List<Address>{
-        try{
-            val geocoder = Geocoder(baseContext)
-            val list = geocoder.getFromLocationName(address, 10)
-
-            toast(list.toString())
-
-            return list
-//                toast(e.toString())
-//                log("geocoder", e.toString())
-            // ... your code that throws the exception here
-        }catch(e: IOException){
-            Log.e("Error", "grpc failed: " + e.message, e)
-            val geocoder = Geocoder(baseContext)
-            val list = geocoder.getFromLocationName(address, 10)
-            toast(list.toString())
-            return list
-            // ... retry again your code that throws the exeception
-        }
-
+    fun getPoint(address: String): List<Address> {
+//        val job = CoroutineScope(Dispatchers.Default).async {
+//                // background thread
+//
+//        }
+        val geocoder = Geocoder(baseContext)
+        val list = geocoder.getFromLocationName(address, 10)
+        log("point", list[0].toString())
+//        toast(list.toString())
+        return list
+//        val msg = job.await()
+//        setMarker(list)
 
     }
 
-    fun setMarker(list: List<Address>){
-        toast(list.size.toString())
+    fun setMarker(list: List<Address>) {
+//        toast(list.size.toString())
         if (list != null) {
             if (list.size == 0) {
-                toast("올바른 주소를 입력해주세요")
+//                toast("올바른 주소를 입력해주세요")
                 Log.d("Point", "list size == 0")
             } else {
                 val address: Address = list[0]
@@ -124,7 +123,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                 marker.map = naverMap
 
             }
-        }else{
+        } else {
             Log.d("Point", "list is null")
         }
     }
@@ -139,7 +138,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
     }
 
-    fun isConnected(context: Context): Boolean{
+    fun isConnected(context: Context): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
         val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
@@ -160,10 +159,44 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 //        naverMap.locationSource = locationSource
         val str = "전라북도 전주시 덕진구 소리로 179"
         val handler = Handler(Looper.getMainLooper())
-        handler.postDelayed(Runnable {
-            val list = getPoint(str)
-            setMarker(list)
-        }, 0)
+        var alist: Deferred<Any>
+
+        try {
+            CoroutineScope(Dispatchers.Default).launch {
+                val job : Deferred<List<Address>> = async{
+                    getPoint(str)
+                }
+                CoroutineScope(Dispatchers.Main).launch {
+                    val list = job.await()
+                    setMarker(list)
+                }
+
+            }
+
+
+//            val result = job.await()
+//            if (alist != null){
+//
+//            }
+//            val add = alist
+////                val address: List<Address> = add as List<Address>
+////                setMarker(address)
+////                setMarker(add)
+//            if (add is List<*>) {
+//                toast(add.toString())
+//                val address: List<Address> = add.filterIsInstance<Address>()
+//                setMarker(address)
+//            }
+        } catch (e: Exception) {
+            toast(e.message.toString())
+            log("Async", e.message.toString())
+        }
+
+//        handler.postDelayed(Runnable {
+//
+////            val list =
+////            setMarker(list)
+//        }, 0)
 
 
     }
@@ -201,7 +234,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val width = metrics.widthPixels
         params.setMargins(0, heightDp, 0, 0)
-        toast(heightDp.toString())
+//        toast(heightDp.toString())
 //        binding.content.layoutParams = params
     }
 
@@ -209,7 +242,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         return this / (context.resources
             .displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
     }
-
 
 
 //     fun uploadContent(){
