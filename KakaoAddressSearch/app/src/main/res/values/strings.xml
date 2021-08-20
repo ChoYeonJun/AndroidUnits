@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KakaoAddressSearch</string>
+    <string name="server_url">http://219.254.140.31//</string>
+    <string name="file_name">daum.html</string>
 </resources>
