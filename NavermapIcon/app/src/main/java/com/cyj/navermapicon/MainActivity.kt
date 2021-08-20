@@ -26,6 +26,7 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
+import com.sothree.slidinguppanel.SlidingUpPanelLayout
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -40,13 +41,16 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var naverMap: NaverMap
     private lateinit var drawerButton: Button
     private lateinit var binding: ActivityMainBinding
+    private lateinit var slidePanel: SlidingUpPanelLayout
     var drawerToggle: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+        slidePanel = binding.mainFrame                      // SlidingUpPanel
+        slidePanel.addPanelSlideListener(PanelEventListener())  // 이벤트 리스너 추가
+//        slidePanel.panelHeight = 500
 //        val but = binding.imageView
 //        but.setOnClickListener {
 //            toast(drawerToggle.toString())
@@ -116,6 +120,15 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 //                    marker.icon = OverlayImage.fromBitmap(bitmap)
                 marker.setOnClickListener { overlay ->
                     toast("마커 1 클릭")
+                    val state = slidePanel.panelState
+                    // 닫힌 상태일 경우 열기
+                    if (state == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+                        slidePanel.panelState = SlidingUpPanelLayout.PanelState.ANCHORED
+                    }
+                    // 열린 상태일 경우 닫기
+                    else if (state == SlidingUpPanelLayout.PanelState.EXPANDED) {
+                        slidePanel.panelState = SlidingUpPanelLayout.PanelState.COLLAPSED
+                    }
                     // 이벤트 소비, OnMapClick 이벤트는 발생하지 않음
 //                        uploadContent()
                     true
@@ -274,5 +287,19 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun log(tag: String, text: String) {
         Log.d(tag, text)
     }
+    inner class PanelEventListener : SlidingUpPanelLayout.PanelSlideListener {
+        // 패널이 슬라이드 중일 때
+        override fun onPanelSlide(panel: View?, slideOffset: Float) {
+            binding.tvSlideOffset.text = slideOffset.toString()
+        }
 
+        // 패널의 상태가 변했을 때
+        override fun onPanelStateChanged(panel: View?, previousState: SlidingUpPanelLayout.PanelState?, newState: SlidingUpPanelLayout.PanelState?) {
+            if (newState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+                binding.btnToggle.text = "열기"
+            } else if (newState == SlidingUpPanelLayout.PanelState.EXPANDED) {
+                binding.btnToggle.text = "닫기"
+            }
+        }
+    }
 }
