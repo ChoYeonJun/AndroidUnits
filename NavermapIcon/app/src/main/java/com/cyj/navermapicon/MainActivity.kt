@@ -170,7 +170,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val uiSettings = naverMap.uiSettings
         uiSettings.isLocationButtonEnabled = true
 //        naverMap.locationSource = locationSource
-        val str = "전라북도 전주시 덕진구 소리로 179"
+        val str = "전라북도 전주시 덕진구 호성동1가 587-36"
         val handler = Handler(Looper.getMainLooper())
         var alist: Deferred<Any>
 

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">StudyLoginRegister</string>
+    <string name="register">회원가입</string>
+    <string name="findIdPwd">ID/PASSWORD 찾기</string>
+    <string name="advanceRegister">가입하기</string>
+    <string name="login">로그인</string>
+    <string name="pwd">PASSWORD</string>
+    <string name="email">EMAIL</string>
+</resources>
