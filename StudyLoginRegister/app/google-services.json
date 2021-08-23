@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "980095868088",
+    "project_id": "studyloginregister",
+    "storage_bucket": "studyloginregister.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980095868088:android:1a96ec5995668877ae684d",
+        "android_client_info": {
+          "package_name": "com.cyj.studyloginregister"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980095868088-v1c6qo76pqllamn60ob8fv6ssdk6v678.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIxAGs_EzItzwtrrTBhdQvAadjNkJ2scE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980095868088-v1c6qo76pqllamn60ob8fv6ssdk6v678.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

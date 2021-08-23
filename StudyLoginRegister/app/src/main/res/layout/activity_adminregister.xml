@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:fontFamily="@font/SCDream6"
+        android:fontFamily="@font/scdream6"
         android:text="독서실 관리자 회원가입"
         android:textColor="@color/TextView"
         android:textSize="24sp"
@@ -113,12 +113,12 @@
         app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName" />
 
     <Button
-        android:enabled="false"
         android:id="@+id/btn_advanceRegister"
         android:layout_width="314dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
-        android:fontFamily="@font/SCDream6"
+        android:enabled="false"
+        android:fontFamily="@font/scdream6"
         android:text="@string/advanceRegister"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
