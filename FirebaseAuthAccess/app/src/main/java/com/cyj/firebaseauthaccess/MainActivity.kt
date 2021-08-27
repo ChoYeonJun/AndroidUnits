@@ -41,7 +41,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val btn_googleSignIn = findViewById<SignInButton>(R.id.btn_googleSignIn)
-        btn_googleSignIn.setOnClickListener { signIn() }
+        btn_googleSignIn.setOnClickListener {
+            signIn()
+        }
 
 //        editText_accountEmail = findViewById<EditText>(R.id.accountEmail)!!
 //        editText_accountName = findViewById<EditText>(R.id.accountName)!!

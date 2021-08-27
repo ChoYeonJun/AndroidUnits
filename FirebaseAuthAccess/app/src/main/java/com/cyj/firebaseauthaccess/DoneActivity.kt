@@ -12,19 +12,45 @@ import com.google.firebase.ktx.Firebase
 
 class DoneActivity : AppCompatActivity() {
     private lateinit var binding : ActivityDoneBinding
+    private lateinit var email: String
+    private lateinit var name: String
+    var isAdmin: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDoneBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         if(intent.hasExtra("Email") && intent.hasExtra("Name")){
-            binding.editTextAccountEmail.setText(intent.getStringExtra("Email"))
-            binding.editTextAccountName.setText(intent.getStringExtra("Name"))
+            email = intent.getStringExtra("Email").toString()
+            name = intent.getStringExtra("Name").toString()
+
+            binding.editTextAccountEmail.setText(email)
+            binding.editTextAccountName.setText(name)
+
+            Register(email, name, isAdmin)
         }
 
-        binding.buttonPushData.setOnClickListener { PushtoUsers() }
+//        binding.buttonPushData.setOnClickListener { PushtoUsers() }
     }
 
+    private fun Register(email: String, name: String, isAdmin: Boolean){
+        val database = Firebase.database
+
+        val myRef = database.getReference("user")
+        val currentFirebaseUser = FirebaseAuth.getInstance().currentUser
+        if (currentFirebaseUser != null) {
+            val postRef = myRef.child(currentFirebaseUser.uid)
+            val user: MutableMap<String, String> = HashMap()
+
+            user["email"] = email
+            user["name"] = name
+            user["isAdmin"] = isAdmin.toString()
+
+            postRef.setValue(user)
+
+            Toast.makeText(this, "register", Toast.LENGTH_SHORT).show()
+        }
+    }
     private fun PushtoUsers() {
         val database = Firebase.database
 
@@ -36,10 +62,10 @@ class DoneActivity : AppCompatActivity() {
 //            mRef.setValue(currentFirebaseUser.uid.toString())
             val postRef = mRef.child(currentFirebaseUser.uid)
             val marks: MutableMap<String, String> = HashMap()
-            marks["Name"] = "fname"
-            marks["Phone"] = "fphone"
-            marks["Year"] = "fyear"
-            marks["Email"] = "femail"
+            marks["Name"] = "name"
+            marks["Phone"] = "phone"
+            marks["Year"] = "year"
+            marks["Email"] = "email"
             val uid = mRef.key
             postRef.setValue(marks)
         }
