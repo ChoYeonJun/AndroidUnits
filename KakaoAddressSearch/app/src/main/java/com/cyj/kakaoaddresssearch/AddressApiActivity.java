@@ -42,6 +42,6 @@ public class AddressApiActivity extends AppCompatActivity {
                 webView.loadUrl("javascript:sample2_execDaumPostcode();");
             }
         });
-        webView.loadUrl(getResources().getString(R.string.server_url)+getResources().getString(R.string.file_name));
+        webView.loadUrl(getResources().getString(R.string.server_url));
     }
 }
