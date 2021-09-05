@@ -33,6 +33,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.github.esafirm:android-image-picker:3.0.0-beta1'
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'
