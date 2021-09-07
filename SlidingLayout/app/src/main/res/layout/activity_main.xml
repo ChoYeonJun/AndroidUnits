@@ -92,10 +92,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_slideText1" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

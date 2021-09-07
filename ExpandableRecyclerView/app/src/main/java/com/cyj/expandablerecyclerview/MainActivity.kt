@@ -34,16 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun toggleLayout(isExpanded: Boolean, view: View, layoutExpand: LinearLayout): Boolean {
-        // 2
-        ToggleAnimation.toggleArrow(view, isExpanded)
-        if (isExpanded) {
-            ToggleAnimation.expand(layoutExpand)
-        } else {
-            ToggleAnimation.collapse(layoutExpand)
-        }
-        return isExpanded
-    }
+
 
     private fun loadData(): List<Person> {
         val people = ArrayList<Person>()
