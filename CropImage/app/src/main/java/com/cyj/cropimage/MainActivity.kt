@@ -125,13 +125,16 @@ class MainActivity : AppCompatActivity() {
     private fun getImageFromCustom(){
         val size = images.size
         cropImageView.setAspectRatio(4, 3)
-        for (i in 0..size.minus(1)){
-            cropImageView.clearImage()
-            cropImageView.visibility = View.GONE
 
-            cropImageView.setImageUriAsync(images[i].uri)
-            results.add(cropImageView.getCroppedImage())
-        }
+        cropImageView.clearImage()
+        cropImageView.visibility = View.VISIBLE
+
+        cropImageView.setImageUriAsync(images[0].uri)
+//        results.add(cropImageView.getCroppedImage())
+//        image.setImageBitmap(cropImageView.getCroppedImage())
+//        for (i in 0..size.minus(1)){
+//
+//        }
 
         Log.d("result", results.size.toString())
     }
