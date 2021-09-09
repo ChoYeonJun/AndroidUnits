@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="MenuStyle" parent="Theme.AppCompat.Light">
+        <item name="android:background">@android:color/white</item>
+    </style>
+    <style name="ToolbarColoredBackArrow" parent="Theme.AppCompat.Light">
+        <item name="android:textColorSecondary">@color/black</item>
+    </style>
+
+</resources>
