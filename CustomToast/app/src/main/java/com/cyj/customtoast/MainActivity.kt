@@ -20,8 +20,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.button.setOnClickListener {
+        binding.toast.setOnClickListener {
             SampleToast.createToast(this, "Welcome to custom toast")?.show()
+        }
+        binding.snackBar.setOnClickListener {
+            SampleSnackBar.make(binding.root,"Welcome to custom Snack bar").show()
         }
     }
 
