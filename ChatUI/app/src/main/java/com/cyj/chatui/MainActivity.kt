@@ -77,8 +77,8 @@ class MainActivity : AppCompatActivity() {
         chats.apply {
             add(Chat( chat = "자유 좌석은 선착순인가요?", isOther = true))
             add(Chat( chat = "네! 1번부터 21번까지 아무 좌석이나 먼저 예약하시고, 방문해서 원하시는 좌석에 앉으시면 됩니다~ ", isOther = false))
-            add(Chat( chat = "고맙다 게이야", isOther = true))
-            add(Chat( chat = "섹1스 섹1스", isOther = false))
+            add(Chat( chat = "고맙습니다", isOther = true))
+            add(Chat( chat = "테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트", isOther = false))
             add(Chat( chat = "꺼억", isOther = true))
 
             chatAdapter.mChat = chats
