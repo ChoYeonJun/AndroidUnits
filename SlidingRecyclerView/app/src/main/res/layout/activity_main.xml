@@ -9,12 +9,14 @@
     tools:context=".MainActivity"
     android:gravity="bottom"
     app:umanoDragView="@id/slide"
-    app:umanoPanelHeight="100dp">
+    app:umanoPanelHeight="100dp"
+    >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/back_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#42A5F5">
+        android:background="#42A5F5"
+        >
 
         <TextView
             android:id="@+id/tv_text1"
