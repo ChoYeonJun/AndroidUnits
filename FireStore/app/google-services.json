@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "813515108834",
+    "project_id": "firestore-da3ca",
+    "storage_bucket": "firestore-da3ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813515108834:android:b8755361263575b9aec9bb",
+        "android_client_info": {
+          "package_name": "com.cyj.firestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "813515108834-urjae5jalijpb0ik27hgamt2qqvrgkht.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cyj.firestore",
+            "certificate_hash": "4eb2ee4aed81999928c3747ab9cb7df6bcaefbe4"
+          }
+        },
+        {
+          "client_id": "813515108834-ma5bk0gjmgfu7r7utv8rhon21nat44n9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEU6GP821wEHiikQOnnICgwfmQCcehEko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "813515108834-ma5bk0gjmgfu7r7utv8rhon21nat44n9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

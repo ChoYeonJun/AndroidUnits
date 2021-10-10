@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
 //            val intent = Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
 //            intent.action = Intent.ACTION_GET_CONTENT
 //            intent.type = "image/*"
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false)
 //            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         getContent.launch(intent)
 //            startActivity(intent)
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
     private fun createConfig(): ImagePickerConfig {
         val folderMode = true
         return ImagePickerConfig {
-            ImagePickerMode.MULTIPLE // multi mode (default mode)
+            ImagePickerMode.SINGLE // multi mode (default mode)
 
             language = "in" // Set image picker language
             theme = R.style.ImagePickerTheme
