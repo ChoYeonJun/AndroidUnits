@@ -1,4 +1,4 @@
-package com.unittest.retrofitsample;
+package com.unittest.retrofitsample.model;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

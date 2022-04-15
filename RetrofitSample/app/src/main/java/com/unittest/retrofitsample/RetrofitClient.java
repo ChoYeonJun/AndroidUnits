@@ -25,7 +25,7 @@ public class RetrofitClient {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private static Retrofit getInstance(){
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor()).build();
-        Gson gson = new GsonBuilder()
+        Gson gson = new GsonBuilder().setLenient()
                 .registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, typeOfT, context)
                         -> LocalDateTime.parse(json.getAsString(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")))
                 .registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, typeOfT, context)
