@@ -1,20 +1,20 @@
 package com.unittest.retrofitsample.model;
 
 public class LoginReqUserDto {
-    private String email;
+    private String username;
     private String password;
 
 
-    public LoginReqUserDto(String email, String password) {
-        this.email = email;
+    public LoginReqUserDto(String username, String password) {
+        this.username = username;
         this.password = password;
     }
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String email) {
+        this.username = username;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {

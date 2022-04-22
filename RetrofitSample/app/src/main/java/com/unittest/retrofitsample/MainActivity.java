@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         CallRetrofit retrofit = new CallRetrofit();
         UUID id = UUID.randomUUID();
         Model__CheckAlready model = new Model__CheckAlready(id, "url", 10, id);
-        retrofit.login(new LoginReqUserDto("test@gmail.com", "password"));
+//        retrofit.login(new LoginReqUserDto("username", "password"));
 
 //        retrofit.createMusic(model);
 
@@ -32,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                retrofit.hello();
+                retrofit.login(new LoginReqUserDto("users", "password"));
+
+//                retrofit.hello();
 
             }
         });

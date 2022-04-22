@@ -15,7 +15,7 @@ public interface RetrofitAPI {
     @POST("musics/create")
     Call<MusicVo> create(@Body Model__CheckAlready modelCheckAlready);
 
-    @POST("authenticate")
+    @POST("users/login")
     Call <JwtResponse> login(@Body LoginReqUserDto loginReqUserDto);
 
     @GET("hello")
