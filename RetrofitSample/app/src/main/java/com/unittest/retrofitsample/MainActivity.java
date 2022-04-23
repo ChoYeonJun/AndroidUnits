@@ -8,8 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.unittest.retrofitsample.model.LoginReqUserDto;
-import com.unittest.retrofitsample.model.Model__CheckAlready;
+import com.unittest.retrofitsample.melisma.model.LoginReqUserDto;
+import com.unittest.retrofitsample.melisma.model.entity.MusicEntity;
+import com.unittest.retrofitsample.melisma.service.MusicService;
 
 import java.util.UUID;
 
@@ -22,17 +23,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         CallRetrofit retrofit = new CallRetrofit();
+        MusicService musicService = new MusicService();
         UUID id = UUID.randomUUID();
-        Model__CheckAlready model = new Model__CheckAlready(id, "url", 10, id);
+        MusicEntity model = new MusicEntity(id, "url", 10, id);
 //        retrofit.login(new LoginReqUserDto("username", "password"));
 
-//        retrofit.createMusic(model);
+        retrofit.login(new LoginReqUserDto("users", "password"));
 
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                retrofit.login(new LoginReqUserDto("users", "password"));
+                musicService.createMusic(model);
 
 //                retrofit.hello();
 

@@ -1,0 +1,47 @@
+package com.unittest.retrofitsample.melisma.service;
+
+import android.util.Log;
+
+import com.unittest.retrofitsample.CallRetrofit;
+import com.unittest.retrofitsample.RetrofitClient;
+import com.unittest.retrofitsample.melisma.MelismaMusicAPI;
+import com.unittest.retrofitsample.melisma.model.entity.MusicEntity;
+import com.unittest.retrofitsample.melisma.model.vo.MusicVo;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MusicService {
+
+    public void createMusic(MusicEntity musicEntity){
+        Call<MusicVo> call = RetrofitClient.createService(MelismaMusicAPI.class, CallRetrofit.getToken()).create(musicEntity);
+        call.enqueue(new Callback<MusicVo>() {
+            @Override
+            public void onResponse(Call<MusicVo> call, Response<MusicVo> response) {
+                if(!response.isSuccessful()){
+                    Log.e("연결이 비정상적 : ", "error code : " + response.code());
+                    return;
+                }
+                MusicVo musicVo = response.body();
+                Log.d("연결이 성공적 : ", response.body().toString());
+                Log.d("music id", musicVo.getId().toString());
+                Log.d("music url", musicVo.getMusicUrl());
+                Log.d("music at", musicVo.getCreatedAt().toString());
+                Log.d("music at", musicVo.getUpdatedAt().toString());
+                Log.d("music url", musicVo.getViews().toString());
+//                if(modelCheckAlready.getMessage() == "can use this number"){
+//                    Log.d("중복검사: ", "중복된 번호가 아닙니다");
+//                    modelCheckAlready.setRight(true);
+//                }
+            }
+
+            @Override
+            public void onFailure(Call<MusicVo> call, Throwable t) {
+
+            }
+
+
+        });
+    }
+}

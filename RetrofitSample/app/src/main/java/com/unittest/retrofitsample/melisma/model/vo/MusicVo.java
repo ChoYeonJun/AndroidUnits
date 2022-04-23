@@ -1,4 +1,4 @@
-package com.unittest.retrofitsample.model;
+package com.unittest.retrofitsample.melisma.model.vo;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

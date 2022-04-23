@@ -1,9 +1,9 @@
-package com.unittest.retrofitsample.model;
+package com.unittest.retrofitsample.melisma.model.entity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Model__CheckAlready {
+public class MusicEntity {
     private UUID id;
 
     private String musicUrl;
@@ -16,7 +16,7 @@ public class Model__CheckAlready {
 
     private UUID createdBy;
 
-    public Model__CheckAlready(UUID id, String musicUrl, Integer views, UUID createdBy) {
+    public MusicEntity(UUID id, String musicUrl, Integer views, UUID createdBy) {
         this.id = id;
         this.musicUrl = musicUrl;
         this.views = views;

@@ -1,4 +1,4 @@
-package com.unittest.retrofitsample.model;
+package com.unittest.retrofitsample.melisma.model;
 
 public class LoginReqUserDto {
     private String username;
