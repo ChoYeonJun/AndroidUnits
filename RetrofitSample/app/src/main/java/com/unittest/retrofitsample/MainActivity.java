@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.unittest.retrofitsample.melisma.model.LoginReqUserDto;
-import com.unittest.retrofitsample.melisma.model.entity.MusicEntity;
+import com.unittest.retrofitsample.melisma.model.dto.MusicDto;
 import com.unittest.retrofitsample.melisma.service.MusicService;
 
 import java.util.UUID;
@@ -24,16 +24,17 @@ public class MainActivity extends AppCompatActivity {
 
         CallRetrofit retrofit = new CallRetrofit();
         MusicService musicService = new MusicService();
-        UUID id = UUID.randomUUID();
-        MusicEntity model = new MusicEntity(id, "url", 10, id);
+
 //        retrofit.login(new LoginReqUserDto("username", "password"));
 
         retrofit.login(new LoginReqUserDto("users", "password"));
-
+//        retrofit.login(new Member("test@gmail.com", "password"));
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                UUID id = UUID.randomUUID();
+                MusicDto model = new MusicDto(id, "url", 10, id);
                 musicService.createMusic(model);
 
 //                retrofit.hello();

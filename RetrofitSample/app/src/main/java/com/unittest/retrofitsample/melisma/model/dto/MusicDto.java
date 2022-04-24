@@ -1,9 +1,9 @@
-package com.unittest.retrofitsample.melisma.model.entity;
+package com.unittest.retrofitsample.melisma.model.dto;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class MusicEntity {
+public class MusicDto {
     private UUID id;
 
     private String musicUrl;
@@ -16,7 +16,7 @@ public class MusicEntity {
 
     private UUID createdBy;
 
-    public MusicEntity(UUID id, String musicUrl, Integer views, UUID createdBy) {
+    public MusicDto(UUID id, String musicUrl, Integer views, UUID createdBy) {
         this.id = id;
         this.musicUrl = musicUrl;
         this.views = views;

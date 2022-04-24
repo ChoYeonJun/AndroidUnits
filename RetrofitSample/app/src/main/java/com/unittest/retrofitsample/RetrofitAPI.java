@@ -1,7 +1,9 @@
 package com.unittest.retrofitsample;
 
+import com.unittest.retrofitsample.melisma.model.Hello;
 import com.unittest.retrofitsample.melisma.model.JwtResponse;
 import com.unittest.retrofitsample.melisma.model.LoginReqUserDto;
+import com.unittest.retrofitsample.melisma.model.Member;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -13,4 +15,9 @@ public interface RetrofitAPI {
     @POST("users/login")
     Call <JwtResponse> login(@Body LoginReqUserDto loginReqUserDto);
 
+    @POST("authenticate")
+    Call <JwtResponse> auth(@Body Member member);
+
+    @GET("hello")
+    Call<Hello> hello();
 }

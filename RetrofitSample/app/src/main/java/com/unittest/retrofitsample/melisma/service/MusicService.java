@@ -5,7 +5,7 @@ import android.util.Log;
 import com.unittest.retrofitsample.CallRetrofit;
 import com.unittest.retrofitsample.RetrofitClient;
 import com.unittest.retrofitsample.melisma.MelismaMusicAPI;
-import com.unittest.retrofitsample.melisma.model.entity.MusicEntity;
+import com.unittest.retrofitsample.melisma.model.dto.MusicDto;
 import com.unittest.retrofitsample.melisma.model.vo.MusicVo;
 
 import retrofit2.Call;
@@ -14,8 +14,8 @@ import retrofit2.Response;
 
 public class MusicService {
 
-    public void createMusic(MusicEntity musicEntity){
-        Call<MusicVo> call = RetrofitClient.createService(MelismaMusicAPI.class, CallRetrofit.getToken()).create(musicEntity);
+    public void createMusic(MusicDto musicDto){
+        Call<MusicVo> call = RetrofitClient.createService(MelismaMusicAPI.class, CallRetrofit.getToken()).create(musicDto);
         call.enqueue(new Callback<MusicVo>() {
             @Override
             public void onResponse(Call<MusicVo> call, Response<MusicVo> response) {
