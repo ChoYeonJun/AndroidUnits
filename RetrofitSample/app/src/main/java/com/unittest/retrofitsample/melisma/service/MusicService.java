@@ -4,9 +4,12 @@ import android.util.Log;
 
 import com.unittest.retrofitsample.CallRetrofit;
 import com.unittest.retrofitsample.RetrofitClient;
-import com.unittest.retrofitsample.melisma.MelismaMusicAPI;
+import com.unittest.retrofitsample.melisma.api.MelismaMusicAPI;
 import com.unittest.retrofitsample.melisma.model.dto.MusicDto;
 import com.unittest.retrofitsample.melisma.model.vo.MusicVo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,6 +45,30 @@ public class MusicService {
             }
 
 
+        });
+    }
+
+    public void searchMusics(){
+        Call<List<MusicVo>> call = RetrofitClient.createService(MelismaMusicAPI.class, CallRetrofit.getToken()).searchList();
+        call.enqueue(new Callback<List<MusicVo>>() {
+            @Override
+            public void onResponse(Call<List<MusicVo>> call, Response<List<MusicVo>> response) {
+                List<MusicVo> vos = response.body();
+
+                for (MusicVo musicVo: vos) {
+                    Log.d("연결이 성공적 : ", response.body().toString());
+                    Log.d("music id", musicVo.getId().toString());
+                    Log.d("music url", musicVo.getMusicUrl());
+                    Log.d("music at", musicVo.getCreatedAt().toString());
+                    Log.d("music at", musicVo.getUpdatedAt().toString());
+                    Log.d("music url", musicVo.getViews().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MusicVo>> call, Throwable t) {
+
+            }
         });
     }
 }
