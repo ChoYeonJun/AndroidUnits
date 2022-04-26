@@ -71,4 +71,20 @@ public class MusicService {
             }
         });
     }
+
+    public void change(MusicDto dto){
+        Call<String> call = RetrofitClient.createService(MelismaMusicAPI.class, CallRetrofit.getToken()).change(dto);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.d("성공 : ", response.body());
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
 }
