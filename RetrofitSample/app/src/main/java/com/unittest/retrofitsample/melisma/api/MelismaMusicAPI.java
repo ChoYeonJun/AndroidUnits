@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface MelismaMusicAPI {
 
@@ -21,4 +22,7 @@ public interface MelismaMusicAPI {
 
     @PATCH("musics/change")
     Call<String> change(@Body MusicDto musicDto);
+
+    @PUT("musics/update")
+    Call<String> update(@Body MusicDto musicDto);
 }

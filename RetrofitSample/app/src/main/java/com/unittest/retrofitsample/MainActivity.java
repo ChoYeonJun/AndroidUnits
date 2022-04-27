@@ -35,8 +35,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 UUID id = UUID.randomUUID();
                 MusicDto model = new MusicDto(id, "url", 10, id);
-//                musicService.createMusic(model);
-                musicService.searchMusics();
+                musicService.createMusic(model);
+//                musicService.searchMusics();
+                model.setViews(100);
+                model.setMusicUrl("musicUrl");
+                musicService.change(model);
 //                retrofit.hello();
 
             }

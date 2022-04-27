@@ -53,6 +53,10 @@ public class MusicService {
         call.enqueue(new Callback<List<MusicVo>>() {
             @Override
             public void onResponse(Call<List<MusicVo>> call, Response<List<MusicVo>> response) {
+                if(!response.isSuccessful()){
+                    Log.e("연결이 비정상적 : ", "error code : " + response.code());
+                    return;
+                }
                 List<MusicVo> vos = response.body();
 
                 for (MusicVo musicVo: vos) {
@@ -78,6 +82,30 @@ public class MusicService {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
+                if(!response.isSuccessful()){
+                    Log.e("연결이 비정상적 : ", "error code : " + response.code());
+                    return;
+                }
+                Log.d("성공 : ", response.body());
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void update(MusicDto dto){
+        Call<String> call = RetrofitClient.createService(MelismaMusicAPI.class, CallRetrofit.getToken()).update(dto);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(!response.isSuccessful()){
+                    Log.e("연결이 비정상적 : ", "error code : " + response.code());
+                    return;
+                }
                 Log.d("성공 : ", response.body());
             }
 
