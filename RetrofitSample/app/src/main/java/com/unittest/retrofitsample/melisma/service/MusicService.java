@@ -10,6 +10,7 @@ import com.unittest.retrofitsample.melisma.model.vo.MusicVo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -98,6 +99,26 @@ public class MusicService {
 
     public void update(MusicDto dto){
         Call<String> call = RetrofitClient.createService(MelismaMusicAPI.class, CallRetrofit.getToken()).update(dto);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(!response.isSuccessful()){
+                    Log.e("연결이 비정상적 : ", "error code : " + response.code());
+                    return;
+                }
+                Log.d("성공 : ", response.body());
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void delete(UUID id){
+        Call<String> call = RetrofitClient.createService(MelismaMusicAPI.class, CallRetrofit.getToken()).delete(id);
 
         call.enqueue(new Callback<String>() {
             @Override

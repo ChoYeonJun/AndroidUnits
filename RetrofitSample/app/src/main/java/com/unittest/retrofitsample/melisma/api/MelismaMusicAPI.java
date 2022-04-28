@@ -4,9 +4,11 @@ import com.unittest.retrofitsample.melisma.model.dto.MusicDto;
 import com.unittest.retrofitsample.melisma.model.vo.MusicVo;
 
 import java.util.List;
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -25,4 +27,8 @@ public interface MelismaMusicAPI {
 
     @PUT("musics/update")
     Call<String> update(@Body MusicDto musicDto);
+
+    @DELETE("musics/delete")
+    Call<String> delete(UUID id);
+
 }

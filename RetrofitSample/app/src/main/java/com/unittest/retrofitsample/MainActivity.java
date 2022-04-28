@@ -39,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
 //                musicService.searchMusics();
                 model.setViews(100);
                 model.setMusicUrl("musicUrl");
-                musicService.change(model);
+//                musicService.change(model);
 //                retrofit.hello();
+                musicService.update(model);
 
             }
         });
