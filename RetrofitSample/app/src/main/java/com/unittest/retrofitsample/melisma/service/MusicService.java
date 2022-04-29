@@ -42,7 +42,7 @@ public class MusicService {
 
             @Override
             public void onFailure(Call<MusicVo> call, Throwable t) {
-
+                Log.e("연결 실패 : ", "error code : " + t.getMessage());
             }
 
 
@@ -72,7 +72,7 @@ public class MusicService {
 
             @Override
             public void onFailure(Call<List<MusicVo>> call, Throwable t) {
-
+                Log.e("연결 실패 : ", "error code : " + t.getMessage());
             }
         });
     }
@@ -92,7 +92,7 @@ public class MusicService {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                Log.e("연결 실패 : ", "error code : " + t.getMessage());
             }
         });
     }
@@ -112,7 +112,7 @@ public class MusicService {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                Log.e("연결 실패 : ", "error code : " + t.getMessage());
             }
         });
     }
@@ -127,7 +127,7 @@ public class MusicService {
                     Log.e("연결이 비정상적 : ", "error code : " + response.code());
                     return;
                 }
-                Log.d("성공 : ", response.body());
+               Log.d( "성공 : ", response.body());
             }
 
             @Override

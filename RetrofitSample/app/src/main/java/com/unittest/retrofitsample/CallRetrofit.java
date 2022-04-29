@@ -25,17 +25,17 @@ public class CallRetrofit {
             @Override
             public void onResponse(Call<JwtResponse> call, Response<JwtResponse> response) {
                 if(!response.isSuccessful()){
-                    Log.e("연결이 비정상적 : ", "error code : " + response.code());
+                    Log.e("로그인 비정상적 : ", "error code : " + response.code());
                     return;
                 }
                 JwtResponse jwtResponse = response.body();
-                Log.e("연결 완료 : ",""+ jwtResponse.getToken());
+                Log.e("로그인 완료 : ",""+ jwtResponse.getToken());
                 token = jwtResponse.getToken();
             }
 
             @Override
             public void onFailure(Call call, Throwable t) {
-
+                Log.e("로그인 실패 : ", "error code : " + t.getMessage());
             }
         });
     }
