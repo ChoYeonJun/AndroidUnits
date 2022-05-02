@@ -42,7 +42,19 @@ public class MainActivity extends AppCompatActivity {
 //                musicService.change(model);
 //                retrofit.hello();
                 musicService.update(model);
+                musicService.searchMusics(new CallbackResponse() {
+                    @Override
+                    public void onSearchSuccess(@NonNull List<MusicVo> vos) {
+                        for (MusicVo vo: vos) {
+                            Log.d("onSuccess search", vo.getId().toString());
+                        }
+                    }
 
+                    @Override
+                    public void onError(@NonNull Throwable throwable) {
+
+                    }
+                });
             }
         });
     }
