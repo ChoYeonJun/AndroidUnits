@@ -49,7 +49,34 @@ public class MusicService {
         });
     }
 
-    public void searchMusics(final CallbackResponse callbackResponse){
+    public void searchMusic(UUID id){
+        Call<MusicVo> call = RetrofitClient.createService(MelismaMusicAPI.class, CallRetrofit.getToken()).search(id);
+        call.enqueue(new Callback<MusicVo> () {
+            @Override
+            public void onResponse(Call<MusicVo> call, Response<MusicVo>  response) {
+                if(!response.isSuccessful()){
+                    Log.e("연결이 비정상적 : ", "error code : " + response.code());
+                    return;
+                }
+                MusicVo musicVo = response.body();
+
+                    Log.d("연결이 성공적 : ", response.body().toString());
+                    Log.d("music id", musicVo.getId().toString());
+                    Log.d("music url", musicVo.getMusicUrl());
+                    Log.d("music at", musicVo.getCreatedAt().toString());
+                    Log.d("music at", musicVo.getUpdatedAt().toString());
+                    Log.d("music url", musicVo.getViews().toString());
+
+            }
+
+            @Override
+            public void onFailure(Call<MusicVo> call, Throwable t) {
+                Log.e("연결 실패 : ", "error code : " + t.getMessage());
+            }
+        });
+    }
+
+    public void searchMusics(final SearchResponse searchResponse){
         Call<List<MusicVo>> call = RetrofitClient.createService(MelismaMusicAPI.class, CallRetrofit.getToken()).searchList();
         call.enqueue(new Callback<List<MusicVo>>() {
             @Override
