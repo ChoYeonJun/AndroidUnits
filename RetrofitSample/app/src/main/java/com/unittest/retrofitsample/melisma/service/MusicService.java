@@ -5,7 +5,7 @@ import android.util.Log;
 import com.unittest.retrofitsample.CallRetrofit;
 import com.unittest.retrofitsample.RetrofitClient;
 import com.unittest.retrofitsample.melisma.api.MelismaMusicAPI;
-import com.unittest.retrofitsample.melisma.callback.CallbackResponse;
+import com.unittest.retrofitsample.melisma.callback.SearchResponse;
 import com.unittest.retrofitsample.melisma.model.dto.MusicDto;
 import com.unittest.retrofitsample.melisma.model.vo.MusicVo;
 
@@ -96,7 +96,7 @@ public class MusicService {
                     Log.d("music url", musicVo.getViews().toString());
                 }
 
-                callbackResponse.onSearchSuccess(vos);
+                searchResponse.onSuccess(vos);
             }
 
             @Override
