@@ -1,17 +1,22 @@
 package com.unittest.retrofitsample;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.unittest.retrofitsample.melisma.callback.SearchResponse;
 import com.unittest.retrofitsample.melisma.model.LoginReqUserDto;
-import com.unittest.retrofitsample.melisma.model.dto.MusicDto;
+import com.unittest.retrofitsample.melisma.model.vo.MusicVo;
 import com.unittest.retrofitsample.melisma.service.MusicService;
 
+import java.util.List;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,29 +38,43 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UUID id = UUID.randomUUID();
-                MusicDto model = new MusicDto(id, "url", 10, id);
-                musicService.createMusic(model);
-//                musicService.searchMusics();
-                model.setViews(100);
-                model.setMusicUrl("musicUrl");
-//                musicService.change(model);
-//                retrofit.hello();
-                musicService.update(model);
-                musicService.searchMusics(new CallbackResponse() {
-                    @Override
-                    public void onSearchSuccess(@NonNull List<MusicVo> vos) {
-                        for (MusicVo vo: vos) {
-                            Log.d("onSuccess search", vo.getId().toString());
-                        }
-                    }
+//                UUID id = UUID.randomUUID();
+//                MusicDto model = new MusicDto(id, "url", 10, id);
+//                musicService.createMusic(model);
+//                musicService.searchMusics(new SearchResponse() {
+//                    @Override
+//                    public void onSuccess(@NonNull List<MusicVo> vos) {
+//                        for (MusicVo vo: vos) {
+//                            Log.d("onSuccess search", vo.getId().toString());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(@NonNull Throwable throwable) {
+//
+//                    }
+//                });
 
-                    @Override
-                    public void onError(@NonNull Throwable throwable) {
+//                String id = "74e052d2-561a-402d-a8b3-0b6261cb63f9";
+//
+//                musicService.searchMusic(UUID.fromString(id));
+//                model.setViews(100);
+//                model.setMusicUrl("musicUrl");
+////                musicService.change(model);
+////                retrofit.hello();
+//                musicService.update(model);
+            }
+        });
 
-                    }
-                });
+        Button youtube_btn = findViewById(R.id.youtube_btn);
+
+        youtube_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, YoutubeActivity.class));
             }
         });
     }
+
+
 }
