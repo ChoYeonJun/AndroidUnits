@@ -1,26 +1,36 @@
 package com.unittest.retrofitsample.melisma.activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.unittest.retrofitsample.CallRetrofit;
 import com.unittest.retrofitsample.R;
+import com.unittest.retrofitsample.melisma.callback.SearchResponse;
 import com.unittest.retrofitsample.melisma.model.LoginReqUserDto;
+import com.unittest.retrofitsample.melisma.model.vo.MusicVo;
 import com.unittest.retrofitsample.melisma.service.MusicService;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    List<String> urls;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        urls = new ArrayList<>();
 
         CallRetrofit retrofit = new CallRetrofit();
         MusicService musicService = new MusicService();
@@ -36,19 +46,20 @@ public class MainActivity extends AppCompatActivity {
 //                UUID id = UUID.randomUUID();
 //                MusicDto model = new MusicDto(id, "url", 10, id);
 //                musicService.createMusic(model);
-//                musicService.searchMusics(new SearchResponse() {
-//                    @Override
-//                    public void onSuccess(@NonNull List<MusicVo> vos) {
-//                        for (MusicVo vo: vos) {
-//                            Log.d("onSuccess search", vo.getId().toString());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(@NonNull Throwable throwable) {
-//
-//                    }
-//                });
+                musicService.searchMusics(new SearchResponse() {
+                    @Override
+                    public void onSuccess(@NonNull List<MusicVo> vos) {
+                        for (MusicVo vo: vos) {
+                            Log.d("onSuccess search", vo.getId().toString());
+                            urls.add(vo.getMusicUrl());
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable throwable) {
+
+                    }
+                });
 
 //                String id = "74e052d2-561a-402d-a8b3-0b6261cb63f9";
 //
@@ -66,7 +77,9 @@ public class MainActivity extends AppCompatActivity {
         youtube_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, YoutubeActivity.class));
+                Intent intent = new Intent(MainActivity.this, YoutubeActivity.class);
+                intent.putExtra("urls", (Serializable) urls);
+                startActivity(intent);
             }
         });
     }
