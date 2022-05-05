@@ -1,4 +1,4 @@
-package com.unittest.retrofitsample;
+package com.unittest.retrofitsample.melisma.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +8,7 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.unittest.retrofitsample.R;
 
 public class YoutubeActivity extends YouTubeBaseActivity {
 
