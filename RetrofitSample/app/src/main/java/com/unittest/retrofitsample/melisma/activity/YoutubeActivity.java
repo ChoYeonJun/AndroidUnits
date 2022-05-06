@@ -1,5 +1,6 @@
 package com.unittest.retrofitsample.melisma.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,21 +11,37 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.unittest.retrofitsample.R;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class YoutubeActivity extends YouTubeBaseActivity {
 
     YouTubePlayerView youTubePlayerView;
     YouTubePlayer.OnInitializedListener listener;
     YouTubePlayer player;
-    Button play_btn;
+    Button play_btn, next_btn;
+    int count = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youtube);
 
-
         youTubePlayerView = findViewById(R.id.youtubeView);
         Button load_btn = findViewById(R.id.load_btn);
         play_btn = findViewById(R.id.play_btn);
+        next_btn = findViewById(R.id.next_btn);
+        Intent intent = getIntent();
+        List<String> urls = Arrays.asList(intent.getStringArrayExtra("urls"));
+
+        next_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadClick(urls.get(count++));
+                playClick();
+            }
+        });
 
         play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
