@@ -19,8 +19,9 @@ public class YoutubeActivity extends YouTubeBaseActivity {
     YouTubePlayerView youTubePlayerView;
     YouTubePlayer.OnInitializedListener listener;
     YouTubePlayer player;
-    Button play_btn, next_btn;
+    Button play_btn, next_btn, load_btn;
     int count = 0;
+    List<String> urls;
 
 
     @Override
@@ -28,13 +29,37 @@ public class YoutubeActivity extends YouTubeBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youtube);
 
+        initialize();
+        setOnClick();
+    }
+
+    private void initialize(){
         youTubePlayerView = findViewById(R.id.youtubeView);
-        Button load_btn = findViewById(R.id.load_btn);
+        load_btn = findViewById(R.id.load_btn);
         play_btn = findViewById(R.id.play_btn);
         next_btn = findViewById(R.id.next_btn);
         Intent intent = getIntent();
-        List<String> urls = Arrays.asList(intent.getStringArrayExtra("urls"));
+        urls = Arrays.asList(intent.getStringArrayExtra("urls"));
 
+
+        listener = new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                player = youTubePlayer;
+                loadClick("str");
+                player.play();
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        };
+
+        youTubePlayerView.initialize("none",listener);
+    }
+
+    private void setOnClick(){
         next_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,22 +81,6 @@ public class YoutubeActivity extends YouTubeBaseActivity {
                 initClick();
             }
         });
-        listener = new YouTubePlayer.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                player = youTubePlayer;
-                loadClick("str");
-                player.play();
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
-            }
-        };
-
-        youTubePlayerView.initialize("none",listener);
-
     }
 
     public void initClick(){
