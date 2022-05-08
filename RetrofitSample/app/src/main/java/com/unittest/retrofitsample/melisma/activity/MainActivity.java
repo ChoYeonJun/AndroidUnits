@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, YoutubeActivity.class);
-                intent.putExtra("urls", (Serializable) urls);
+                intent.putStringArrayListExtra("urls",  (ArrayList<String>)urls);
                 startActivity(intent);
             }
         });

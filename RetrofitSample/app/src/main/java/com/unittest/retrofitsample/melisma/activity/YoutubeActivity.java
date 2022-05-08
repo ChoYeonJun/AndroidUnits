@@ -11,6 +11,7 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.unittest.retrofitsample.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,13 +22,15 @@ public class YoutubeActivity extends YouTubeBaseActivity {
     YouTubePlayer player;
     Button play_btn, next_btn, load_btn;
     int count = 0;
-    List<String> urls;
+    ArrayList<String> urls;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youtube);
+        Intent intent = getIntent();
+        urls = intent.getStringArrayListExtra("urls");
 
         initialize();
         setOnClick();
@@ -35,19 +38,17 @@ public class YoutubeActivity extends YouTubeBaseActivity {
 
     private void initialize(){
         youTubePlayerView = findViewById(R.id.youtubeView);
-        load_btn = findViewById(R.id.load_btn);
-        play_btn = findViewById(R.id.play_btn);
-        next_btn = findViewById(R.id.next_btn);
-        Intent intent = getIntent();
-        urls = Arrays.asList(intent.getStringArrayExtra("urls"));
+//        load_btn = findViewById(R.id.load_btn);
+//        play_btn = findViewById(R.id.play_btn);
+//        next_btn = findViewById(R.id.next_btn);
 
 
         listener = new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 player = youTubePlayer;
-                loadClick("str");
-                player.play();
+                loadClick(urls.get(count++));
+//                player.play();
             }
 
             @Override
@@ -60,27 +61,28 @@ public class YoutubeActivity extends YouTubeBaseActivity {
     }
 
     private void setOnClick(){
-        next_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadClick(urls.get(count++));
-                playClick();
-            }
-        });
-
-        play_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playClick();
-            }
-        });
-
-        load_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                initClick();
-            }
-        });
+//        next_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                player.pause();
+//                loadClick(urls.get(count++));
+//                playClick();
+//            }
+//        });
+//
+//        play_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                playClick();
+//            }
+//        });
+//
+//        load_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                initClick();
+//            }
+//        });
     }
 
     public void initClick(){
@@ -88,7 +90,7 @@ public class YoutubeActivity extends YouTubeBaseActivity {
     }
 
     public void loadClick(String code){
-        player.loadVideo("1cB5BREyq9Y");
+        player.loadVideo(code);
     }
 
     public void playClick(){
