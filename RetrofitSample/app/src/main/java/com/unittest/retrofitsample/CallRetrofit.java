@@ -5,7 +5,7 @@ import android.util.Log;
 import com.unittest.retrofitsample.melisma.model.Hello;
 import com.unittest.retrofitsample.melisma.model.Member;
 import com.unittest.retrofitsample.melisma.model.JwtResponse;
-import com.unittest.retrofitsample.melisma.model.LoginReqUserDto;
+import com.unittest.retrofitsample.melisma.model.dto.LoginReqUserDto;
 
 import retrofit2.Call;
 import retrofit2.Callback;

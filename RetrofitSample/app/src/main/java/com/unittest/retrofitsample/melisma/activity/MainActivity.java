@@ -14,11 +14,10 @@ import android.widget.Button;
 import com.unittest.retrofitsample.CallRetrofit;
 import com.unittest.retrofitsample.R;
 import com.unittest.retrofitsample.melisma.callback.SearchResponse;
-import com.unittest.retrofitsample.melisma.model.LoginReqUserDto;
+import com.unittest.retrofitsample.melisma.model.dto.LoginReqUserDto;
 import com.unittest.retrofitsample.melisma.model.vo.MusicVo;
 import com.unittest.retrofitsample.melisma.service.MusicService;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         retrofit.login(new LoginReqUserDto("users", "password"));
 //        retrofit.login(new Member("test@gmail.com", "password"));
-        Button button = findViewById(R.id.button);
+        Button button = findViewById(R.id.search_btn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

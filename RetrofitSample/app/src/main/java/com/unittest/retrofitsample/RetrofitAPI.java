@@ -2,7 +2,7 @@ package com.unittest.retrofitsample;
 
 import com.unittest.retrofitsample.melisma.model.Hello;
 import com.unittest.retrofitsample.melisma.model.JwtResponse;
-import com.unittest.retrofitsample.melisma.model.LoginReqUserDto;
+import com.unittest.retrofitsample.melisma.model.dto.LoginReqUserDto;
 import com.unittest.retrofitsample.melisma.model.Member;
 
 import retrofit2.Call;
