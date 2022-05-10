@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.unittest.retrofitsample.CallRetrofit;
 import com.unittest.retrofitsample.R;
@@ -39,6 +40,17 @@ public class MainActivity extends AppCompatActivity {
         retrofit.login(new LoginReqUserDto("users", "password"));
 //        retrofit.login(new Member("test@gmail.com", "password"));
         Button button = findViewById(R.id.search_btn);
+        EditText codeEditText = findViewById(R.id.codeEditText);
+
+        Button add_btn = findViewById(R.id.add_btn);
+        add_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String code = codeEditText.getText().toString();
+                if(code != "")
+                    urls.add(code);
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
